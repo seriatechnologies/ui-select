@@ -730,14 +730,18 @@ uis.controller('uiSelectCtrl',
     var posY = highlighted.offsetTop + highlighted.clientHeight - container[0].scrollTop;
     var height = container[0].offsetHeight;
 
-    if (posY > height) {
-      container[0].scrollTop += posY - height;
-    } else if (posY < highlighted.clientHeight) {
-      if (ctrl.isGrouped && ctrl.activeIndex === 0)
-        container[0].scrollTop = 0; //To make group header visible when going all the way up
-      else
-        container[0].scrollTop -= highlighted.clientHeight - posY;
-    }
+    // Mateen - Always scroll the selected items to top of list
+    // 26 is height of a single item
+    container[0].scrollTop += posY - 26; 
+
+    //if (posY > height) {
+    //  container[0].scrollTop += posY - height;
+    //} else if (posY < highlighted.clientHeight) {
+    //  if (ctrl.isGrouped && ctrl.activeIndex === 0)
+    //    container[0].scrollTop = 0; //To make group header visible when going all the way up
+    //  else
+    //    container[0].scrollTop -= highlighted.clientHeight - posY;
+    //}
   }
 
   var onResize = $$uisDebounce(function() {
